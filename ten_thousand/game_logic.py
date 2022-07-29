@@ -60,12 +60,22 @@ class GameLogic:
                 print("OK, bye")
                 break
             elif choice == "r":
-                roll = self()
+                roll = self
                 values_in_roll = []
                 for value in roll:
                     values_in_roll.append(str(value))
                 formatted_roll = " ".join(values_in_roll)
                 print(f"*** {formatted_roll} ***")
+
+    @staticmethod
+    def validate_keepers(roll, user_input):
+        roll_most_common = Counter(roll).most_common()
+        input_most_common = Counter(user_input).most_common()
+        for i in range(len(input_most_common)):
+            if input_most_common[i][1] > roll_most_common[i][1]:
+                return False
+            else:
+                return True
 
     if __name__ == '__main__':
         play_dice(dice_roller_4_3)
