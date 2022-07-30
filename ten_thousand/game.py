@@ -37,13 +37,13 @@ def play_game():
 
 def start_game(num_rounds):
     """
-       Start the game and run for given number of rounds
-       Args:
-           num_rounds:
+    Start the game and run for given number of rounds
+    Args:
+        num_rounds:
 
-       Returns:
-           None
-        """
+    Returns:
+        None
+    """
     round_num = 1
     total_points = 0
     while round_num <= 10:
@@ -94,7 +94,6 @@ def display_numbers():
     roll = roller(dice_num)
     formatted_roller = " ".join([str(i) for i in roller])
     print(f"*** {formatted_roller} ***")
-
 
 # def confirm_keepers(roll):
 #     pass
@@ -147,14 +146,10 @@ def handle_bank(self):
 
 def confirm_keepers(roll):
     """
-
     Return values that user would like to keep after being validated
-
     Loops until user quits or follows the rules (aka keeps values that are valid)
-
     Args:
         roll: tuple of integers
-
     Returns:
         tuple of values to keep aka "keepers"
         empty tuple signals a "quit"
@@ -194,15 +189,6 @@ def do_roll(num_dice):
     """
     pass
 
-
-
-def decline_game():
-    """
-    Displays message to declining player
-    Returns:
-        None
-    """
-    print('OK. Maybe another time')
 
 
 def bank_roll_quit(unbanked_points, left_dice):
