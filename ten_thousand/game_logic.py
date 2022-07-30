@@ -15,9 +15,9 @@ class GameLogic:
         pass
 
     @staticmethod
-    def roll_dice(value):
+    def roll_dice(num_dice):
         dice_list = []
-        while len(dice_list) != value:
+        while len(dice_list) != num_dice:
             dice_list.append(randint(1, 6))
         return tuple(dice_list)
 
@@ -77,5 +77,5 @@ class GameLogic:
             else:
                 return True
 
-    if __name__ == '__main__':
-        play_dice(dice_roller_4_3)
+    # if __name__ == '__main__':
+    #     play_dice(dice_roller_4_3)
