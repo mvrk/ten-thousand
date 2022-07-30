@@ -1,13 +1,21 @@
 # Ten thousand dice game
 
 This is a command line version of the dice game Ten thousand.
-
+## Author: Rui Guo
 ## Day I
 
 - Class GameLogic:
   - dice_roll(): generate random numbers between 1 to 6.
   - calculate_score(): calculate score based on diced numbers according to game rule.
+  
+### Tests
+Test can be running in a python virtual environment. the running command is:
+```angular2html
+ptw -c -- -k <test_file_name>
+```
+test files are under ```./tests/version_1``` folder.
 
+- All 47 test passed.(update)
 ## Day II
 
 - Application should implement all features from previous version
