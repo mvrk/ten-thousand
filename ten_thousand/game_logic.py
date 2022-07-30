@@ -2,14 +2,6 @@ from random import randint
 from collections import Counter
 
 
-def default_dice_roller():
-    return randint(1, 6), randint(1, 6)
-
-
-def dice_roller_4_3():
-    return 4, 3
-
-
 class GameLogic:
     def __init__(self):
         pass
@@ -22,60 +14,42 @@ class GameLogic:
         return tuple(dice_list)
 
     @staticmethod
-    def calculate_score(dice):  # dice is a tuple of ints from user dice roll
-        if len(dice) > 6:
-            raise Exception
-        counts = Counter(dice)
-        if len(counts) == 6:  # 1, 2, 3, 4, 5, 6
-            return 1500
-        if len(counts) == 3 and all(val == 2 for val in counts.values()):
-            return 1500
+    # Calculate score based on presented rolled values.
+    def calculate_score(roll):
         score = 0
-        ones_used = False
-        fives_used = False
-        for num in range(1, 7):
-            a_count = counts[num]
-            if a_count >= 3:
-                if num == 1:
-                    ones_used = True
-                elif num == 5:
-                    fives_used = True
-                    score += num * 100
-                    # handle 4,5,6 of a kind
-                    a_beyond_3 = a_count - 3
-                    score += score * a_beyond_3
-                    if num == 1:
-                        score *= 100
-        if not ones_used:
-            score += counts.get(1, 0) * 100
-        if not fives_used:
-            score += counts.get(5, 0) * 50
+        # before roll
+        if roll is None:
+            roll = [0]
+
+        # rolled, sort numbers by  their values
+        count_dice = Counter(roll).most_common()
+
+        # if rolled out 1, 2, 3, 4, 5, 6
+        if len(count_dice) == 6:
+            return 1500
+
+        # if rolled out 3 pairs, i.e: 2, 2, 3, 3, 6, 6
+        if len(roll) == 6 and len(count_dice) == 3:
+            return 1500
+
+        else:
+            for i in range(len(count_dice)):
+                number = count_dice[i][0]
+                common = count_dice[i][1]
+                base = number * 100
+                # handle 1' score pattern
+                if number == 1:
+                    if common > 2:
+                        base = number * 1000
+                    else:
+                        score += base * common
+                # handle 5' score pattern
+                if number == 5:
+                    if common == 1:
+                        score = 50
+                    if common == 2:
+                        score = 100
+                # handle 2, 3, 4, 6
+                if common > 2:
+                    score += base * (common - 2)
         return score
-
-    def play_dice(self):
-        while True:
-            print("Enter r to roll or q to quit")
-            choice = input("> ")
-            if choice == "q":
-                print("OK, bye")
-                break
-            elif choice == "r":
-                roll = self
-                values_in_roll = []
-                for value in roll:
-                    values_in_roll.append(str(value))
-                formatted_roll = " ".join(values_in_roll)
-                print(f"*** {formatted_roll} ***")
-
-    @staticmethod
-    def validate_keepers(roll, user_input):
-        roll_most_common = Counter(roll).most_common()
-        input_most_common = Counter(user_input).most_common()
-        for i in range(len(input_most_common)):
-            if input_most_common[i][1] > roll_most_common[i][1]:
-                return False
-            else:
-                return True
-
-    # if __name__ == '__main__':
-    #     play_dice(dice_roller_4_3)
