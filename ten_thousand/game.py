@@ -189,7 +189,33 @@ def do_roll(num_dice):
     """
     pass
 
+    def play_dice(self):
+        while True:
+            print("Enter r to roll or q to quit")
+            choice = input("> ")
+            if choice == "q":
+                print("OK, bye")
+                break
+            elif choice == "r":
+                roll = self
+                values_in_roll = []
+                for value in roll:
+                    values_in_roll.append(str(value))
+                formatted_roll = " ".join(values_in_roll)
+                print(f"*** {formatted_roll} ***")
 
+    # @staticmethod
+    # def validate_keepers(roll, user_input):
+    #     roll_most_common = Counter(roll).most_common()
+    #     input_most_common = Counter(user_input).most_common()
+    #     for i in range(len(input_most_common)):
+    #         if input_most_common[i][1] > roll_most_common[i][1]:
+    #             return False
+    #         else:
+    #             return True
+
+    # if __name__ == '__main__':
+    #     play_dice(dice_roller_4_3)
 
 def bank_roll_quit(unbanked_points, left_dice):
     print(f"You have {unbanked_points} unbanked points and {left_dice} dice remaining)
