@@ -1,17 +1,20 @@
-class Banker:
-    def __init__(self):
-        self.shelved = 0
-        self.total = 0
 
-    def shelf(self, unbanked_points):
-        self.shelved += unbanked_points
+class Banker:
+
+    def __init__(self):
+        self.balance = 0
+        self.shelved = 0
 
     def bank(self):
-        self.total+= self.shelved
+        amount_deposited = self.shelved
+        self.balance += self.shelved
         self.shelved = 0
-        return self.total
+        return amount_deposited
 
-    def clear_self(self):
+    def shelf(self, amount_total):
+        self.shelved += amount_total
+
+    def clear_shelf(self):
         self.shelved = 0
 
 
