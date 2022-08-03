@@ -14,6 +14,16 @@ class GameLogic:
         return tuple(dice_list)
 
     @staticmethod
+    def get_scorers(dice):
+        dice_list = []
+        for num in dice:
+            if num == 1:
+                dice_list.append(num)
+            elif num == 5:
+                dice_list.append(num)
+        return tuple(dice_list)
+
+    @staticmethod
     # Calculate score based on presented rolled values.
     def calculate_score(roll):
         score = 0
@@ -22,7 +32,7 @@ class GameLogic:
             roll = [0]
 
         # rolled, sort numbers by  their values
-        count_dice = Counter(roll).most_common()
+        count_dice = Counter(roll)
 
         # if rolled out 1, 2, 3, 4, 5, 6
         if len(count_dice) == 6:
@@ -33,23 +43,31 @@ class GameLogic:
             return 1500
 
         else:
-            for i in range(len(count_dice)):
-                number = count_dice[i][0]
-                common = count_dice[i][1]
-                base = number * 100
-                # handle 1' score pattern
-                if number == 1:
-                    if common > 2:
-                        base = number * 1000
+            for i in range(1,7):
+                count = count_dice[i]
+                if i == 1:
+                    if count >= 3:
+                        score += (count - 2) * 1000
                     else:
-                        score += base * common
-                # handle 5' score pattern
-                if number == 5:
-                    if common == 1:
-                        score = 50
-                    if common == 2:
-                        score = 100
-                # handle 2, 3, 4, 6
-                if common > 2:
-                    score += base * (common - 2)
+                        score += count * 100
+                elif i == 5:
+                    if count >= 3:
+                        score += (count - 2) * 500
+                    else:
+                        score += count * 50
+                else:
+                    if count >= 3:
+                        score += i * (count - 2) * 100
         return score
+
+    # @staticmethod
+    # def get_scorers(dice):
+    #     dice_list = []
+    #     for num in dice:
+    #         if num == 1:
+    #             dice_list.append(num)
+    #         elif num == 5:
+    #             dice_list.append(num)
+    #     return tuple(dice_list)
+
+
