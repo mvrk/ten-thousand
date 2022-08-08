@@ -1,6 +1,6 @@
 from collections import Counter
-from banker import Banker
-from game_logic import GameLogic
+from ten_thousand.banker import Banker
+from ten_thousand.game_logic import GameLogic
 import sys
 
 '''

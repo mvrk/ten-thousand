@@ -43,7 +43,7 @@ class GameLogic:
             return 1500
 
         else:
-            for i in range(1,7):
+            for i in range(1, 7):
                 count = count_dice[i]
                 if i == 1:
                     if count >= 3:
@@ -60,14 +60,11 @@ class GameLogic:
                         score += i * (count - 2) * 100
         return score
 
-    # @staticmethod
-    # def get_scorers(dice):
-    #     dice_list = []
-    #     for num in dice:
-    #         if num == 1:
-    #             dice_list.append(num)
-    #         elif num == 5:
-    #             dice_list.append(num)
-    #     return tuple(dice_list)
-
-
+    def validate_keepers(dice_list, user_input):
+        roll_most_common = Counter(dice_list).most_common()
+        input_most_common = Counter(user_input).most_common()
+        for i in range(len(input_most_common)):
+            if input_most_common[i][1] > roll_most_common[i][1]:
+                return False
+            else:
+                return True
