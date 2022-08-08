@@ -1,6 +1,6 @@
 import pytest
 from ten_thousand.game_logic import GameLogic
-
+from ten_thousand.game import validate_keepers
 pytestmark = [pytest.mark.version_3]
 
 
